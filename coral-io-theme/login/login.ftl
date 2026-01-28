@@ -5,24 +5,44 @@
         Coral-io Login
     <#elseif section = "form">
         <div class="container">
+      
+      
+       <#-- Affichage des messages de reset password -->
+<#if message??>
+    <#if message.type == 'success'>
+        <div class="alert alert-success">
+            ${message.summary?if_exists}  <#-- message de type succès, ex: email envoyé -->
+        </div>
+    <#elseif message.type == 'error'>
+        <div class="alert alert-error">
+            <#-- Cas spécifique pour utilisateur non trouvé -->
+            <#if message.summary?contains('USER_NOT_FOUND')>
+                L'utilisateur ou l'email n'existe pas.
+            <#else>
+                ${message.summary?if_exists}  <#-- autre erreur -->
+            </#if>
+        </div>
+    </#if>
+</#if>
+
+
             <!-- Sign In Form -->
             <div class="form-container sign-in-container">
+            
                 <form id="kc-form-login" action="${url.loginAction}" method="post">
                     <h1>Sign in</h1>
+                        <br><br>
+                    
 
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+                    <span>Veuillez saisir vos coordonnées</span>
+<br><br>
+                  <#if message?? && message.type == 'error'>
+    <div class="login-error">
+        Email ou mot de passe incorrect. Veuillez réessayer.
+    </div>
+</#if>
 
-                    <span>or use your account</span>
-<br>
-                    <#if messagesPerField.existsError('username','password')>
-                        <div class="alert alert-error">
-                            ${kcSanitize(messagesPerField.getFirstError('username','password'))?no_esc}
-                        </div>
-                    </#if>
+
 
                     <input type="text" 
                            name="username" 
@@ -49,11 +69,9 @@
                     </#if>
                     <br>
                     <button type="submit">Sign In</button>
-                    
+                    <br><br>
                     <#-- Lien vers la page de réinitialisation de mot de passe de Keycloak -->
-                    <div class="forgot-password-link">
-                        <a href="${url.loginResetCredentialsUrl}">Forgot your password?</a>
-                    </div>
+                  
                 </form>
             </div>
 
@@ -82,20 +100,7 @@
                 const container = document.querySelector('.container');
                 
                 // Animation seulement pour le bouton "Forgot Password" dans l'overlay
-                if (forgotPasswordBtn) {
-                    forgotPasswordBtn.addEventListener('click', function(e) {
-                        // Si c'est un bouton dans l'overlay, on anime d'abord
-                        if (e.target.classList.contains('ghost') && !container.classList.contains('right-panel-active')) {
-                            e.preventDefault();
-                            // Animation du slide
-                            container.classList.add('right-panel-active');
-                            // Après l'animation, suivre le lien
-                            setTimeout(() => {
-                                window.location.href = e.target.href;
-                            }, 600);
-                        }
-                    });
-                }
+                
                 
                 // Bouton "Sign In" dans l'overlay - animation seulement
                 if (signInButton) {

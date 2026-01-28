@@ -9,11 +9,26 @@
             <p>Enter your username or email to receive reset instructions.</p>
             
             <form id="kc-reset-password-form" action="${url.loginAction}" method="post">
-                <#if messagesPerField.existsError('username')>
-                    <div class="alert alert-error">
-                        ${kcSanitize(messagesPerField.getFirstError('username'))?no_esc}
+                
+                <!-- ===== MESSAGES SPÉCIFIQUES ===== -->
+                <#-- Si email envoyé avec succès -->
+                <#if message?? && message.type == 'success'>
+                    <div class="alert alert-success">
+                        An email has been sent to reset your password. Please check your inbox.
                     </div>
+                <#elseif message?? && message.type == 'error'>
+                    <#-- Username/email incorrect -->
+                    <#if messagesPerField.existsError('username')>
+                        <div class="alert alert-error">
+                            This username or email does not exist.
+                        </div>
+                    <#else>
+                        <div class="alert alert-error">
+                            Failed to send reset email. Please try again later.
+                        </div>
+                    </#if>
                 </#if>
+                <!-- ===== FIN MESSAGES ===== -->
 
                 <input type="text" 
                        id="username" 
@@ -22,7 +37,7 @@
                        placeholder="Username or Email" 
                        autofocus
                        aria-invalid="<#if messagesPerField.existsError('username')>true</#if>"/>
-
+                <br>
                 <button type="submit">Submit</button>
                 
                 <div class="back-to-login">
@@ -30,7 +45,7 @@
                 </div>
             </form>
         </div>
-        
+
         <style>
             .reset-password-container {
                 background: white;
@@ -52,6 +67,25 @@
                 color: #666;
                 margin-bottom: 30px;
                 font-size: 14px;
+            }
+
+            .alert {
+                padding: 12px 20px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+
+            .alert-success {
+                background-color: rgba(76, 175, 80, 0.1);
+                color: #4CAF50;
+                border: 1px solid #4CAF50;
+            }
+
+            .alert-error {
+                background-color: rgba(255, 75, 43, 0.1);
+                color: #FF4B2B;
+                border: 1px solid #FF4B2B;
             }
             
             .back-to-login {
