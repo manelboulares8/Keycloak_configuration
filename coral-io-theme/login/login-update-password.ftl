@@ -2,11 +2,11 @@
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('password','password-confirm'); section>
     <#if section = "header">
-        Update Password
+        Mettre à jour le mot de passe
     <#elseif section = "form">
         <div class="update-password-container">
-            <h1>Create New Password</h1>
-            <p>Your new password must be different from previously used passwords.</p>
+            <h1>Créer un nouveau mot de passe</h1>
+            <p>Votre nouveau mot de passe doit être différent de vos mots de passe précédents.</p>
             
             <form id="kc-passwd-update-form" action="${url.loginAction}" method="post">
                 <#if messagesPerField.existsError('password','password-confirm')>
@@ -18,7 +18,7 @@
                 <input type="password" 
                        id="password-new" 
                        name="password-new" 
-                       placeholder="New Password" 
+                       placeholder="Nouveau mot de passe" 
                        autofocus
                        autocomplete="new-password"
                        aria-invalid="<#if messagesPerField.existsError('password','password-confirm')>true</#if>"/>
@@ -26,11 +26,11 @@
                 <input type="password" 
                        id="password-confirm" 
                        name="password-confirm" 
-                       placeholder="Confirm New Password"
+                       placeholder="Confirmez votre nouveau mot de passe"
                        autocomplete="new-password"
                        aria-invalid="<#if messagesPerField.existsError('password-confirm')>true</#if>"/>
 
-                <button type="submit">Update Password</button>
+                <button type="submit">Mettre à jour</button>
             </form>
         </div>
         

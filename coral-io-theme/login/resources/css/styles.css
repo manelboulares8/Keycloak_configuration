@@ -447,4 +447,35 @@ footer a {
 /* Placeholder blanc derrière le slide */
 
 
-/* Le reste de votre CSS existant reste inchangé */
+form#kc-register-form {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      font-weight: 600;
+    }
+
+    input, select {
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      padding: 0.75rem;
+      width: 100%;
+    }
+  }
+
+  button {
+    background: linear-gradient(135deg, #de511a 0%, #f17815 100%);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+}

@@ -2,7 +2,7 @@
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayInfo=false displayMessage=!messagesPerField.existsError('username','password'); section>
     <#if section = "header">
-        Coral-io Login
+        Connexion Coral-io
     <#elseif section = "form">
         <div class="container">
       
@@ -30,7 +30,7 @@
             <div class="form-container sign-in-container">
             
                 <form id="kc-form-login" action="${url.loginAction}" method="post">
-                    <h1>Sign in</h1>
+                    <h1>Connexion</h1>
                         <br><br>
                     
 
@@ -46,14 +46,14 @@
 
                     <input type="text" 
                            name="username" 
-                           placeholder="Email or Username" 
+                           placeholder="Email ou nom d'utilisateur" 
                            value="${(login.username!'')}" 
                            autofocus
                            aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>"/>
 
                     <input type="password" 
                            name="password" 
-                           placeholder="Password"
+                           placeholder="Mot de passe"
                            aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>"/>
 
                     <#if realm.rememberMe>
@@ -63,12 +63,12 @@
                                        id="rememberMe" 
                                        name="rememberMe" 
                                        <#if login.rememberMe??>checked</#if>/>
-                                Remember me
+                                Se souvenir de moi
                             </label>
                         </div>
                     </#if>
                     <br>
-                    <button type="submit">Sign In</button>
+                    <button type="submit">Se connecter</button>
                     <br><br>
                     <#-- Lien vers la page de réinitialisation de mot de passe de Keycloak -->
                   
@@ -79,15 +79,15 @@
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
-                        <h1>Welcome Back!</h1>
-                        <p>To keep connected with us please login with your personal info</p>
+                        <h1>Bon retour !<</h1>
+                        <p>Pour rester connecté avec nous, veuillez vous connecter avec vos informations personnelles</p>
                         <button class="ghost" id="signIn">Sign In</button>
                     </div>
 
                     <div class="overlay-panel overlay-right">
-                        <h1>Forgot Password?</h1>
-                        <p>Click the link below to reset your password</p>
-                        <a href="${url.loginResetCredentialsUrl}" class="ghost" id="forgotPasswordBtn">Reset Password</a>
+                        <h1>Mot de passe oublié ?</h1>
+                        <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe</p>
+                        <a href="${url.loginResetCredentialsUrl}" class="ghost" id="forgotPasswordBtn">Réinitialiser le mot de passe</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
     <#elseif section = "info">
         <#if realm.password && realm.resetPasswordAllowed>
             <div id="kc-password-reset">
-                <span>Forgot your password? <a href="${url.loginResetCredentialsUrl}">Reset it here</a></span>
+                <span>Mot de passe oublié ?<a href="${url.loginResetCredentialsUrl}">Réinitialisez-le ici</a></span>
             </div>
         </#if>
     </#if>

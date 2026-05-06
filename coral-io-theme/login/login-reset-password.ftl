@@ -2,11 +2,11 @@
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username'); section>
     <#if section = "header">
-        Reset Password
+        Réinitialisation du mot de passe
     <#elseif section = "form">
         <div class="reset-password-container">
-            <h1>Reset Your Password</h1>
-            <p>Enter your username or email to receive reset instructions.</p>
+            <h1>Réinitialiser votre mot de passe</h1>
+            <p>Saisissez votre nom d'utilisateur ou votre email pour recevoir les instructions de réinitialisation.</p>
             
             <form id="kc-reset-password-form" action="${url.loginAction}" method="post">
                 
@@ -14,17 +14,17 @@
                 <#-- Si email envoyé avec succès -->
                 <#if message?? && message.type == 'success'>
                     <div class="alert alert-success">
-                        An email has been sent to reset your password. Please check your inbox.
+                        Un email a été envoyé pour réinitialiser votre mot de passe. Veuillez vérifier votre boîte de réception.
                     </div>
                 <#elseif message?? && message.type == 'error'>
                     <#-- Username/email incorrect -->
                     <#if messagesPerField.existsError('username')>
                         <div class="alert alert-error">
-                            This username or email does not exist.
+                            Ce nom d'utilisateur ou email n'existe pas.
                         </div>
                     <#else>
                         <div class="alert alert-error">
-                            Failed to send reset email. Please try again later.
+                             Échec de l'envoi de l'email de réinitialisation. Veuillez réessayer plus tard.
                         </div>
                     </#if>
                 </#if>
@@ -38,10 +38,10 @@
                        autofocus
                        aria-invalid="<#if messagesPerField.existsError('username')>true</#if>"/>
                 <br>
-                <button type="submit">Submit</button>
+                <button type="submit">Envoyer</button>
                 
                 <div class="back-to-login">
-                    <a href="${url.loginUrl}">Back to Login</a>
+                    <a href="${url.loginUrl}">Retour à la connexion</a>
                 </div>
             </form>
         </div>
